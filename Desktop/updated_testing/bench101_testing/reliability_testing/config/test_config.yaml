@@ -1,0 +1,50 @@
+# Reliability Testing Configuration
+
+reliability_testing:
+  # Test Duration Settings
+  continuous_test:
+    default_duration_minutes: 5  # Short test for CI/CD
+    extended_duration_minutes: 60  # Extended test
+    long_duration_hours: 24  # Full 24-hour test
+  
+  # Request Patterns
+  traffic_pattern:
+    base_rate_per_minute: 10
+    peak_multiplier: 2.5
+    request_interval_seconds: 6
+  
+  # Test Users
+  test_users:
+    count: 10
+    prefix: "reliability_test_user"
+  
+  # Success Criteria
+  success_criteria:
+    availability_threshold: 0.95  # 95%
+    error_rate_threshold: 0.05  # 5%
+    memory_growth_threshold: 0.50  # 50% max growth
+    response_time_threshold_seconds: 30
+  
+  # Services
+  services:
+    redis:
+      host: "localhost"
+      port: 6379
+      timeout: 5
+    
+    mongodb:
+      uri: "mongodb://localhost:27017"
+      timeout: 5
+    
+    customer_api:
+      url: "http://localhost:9002"
+      timeout: 5
+    
+    order_api:
+      url: "http://localhost:9004"
+      timeout: 5
+    
+    chat_api:
+      url: "http://localhost:9007"
+      timeout: 5
+
